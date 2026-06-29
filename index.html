@@ -3,469 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geometry Dash: Extreme Impossible List</title>
+    <title>ЧВК Лишайник Team List</title>
     <style>
-        /* ==========================================================================
-           1. СБРОС СТИЛЕЙ И БАЗОВЫЕ НАСТРОЙКИ (RESET & BASE)
-           ========================================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #08090c;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1f2330;
-            border-radius: 5px;
-            border: 2px solid #08090c;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00f0ff;
-        }
-
+        /* Общие настройки темы */
         body {
-            background-color: #060709;
-            color: #e2e8f0;
-            min-height: 100vh;
+            background-color: #0c0714;
+            color: #e2daf0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
-        }
-
-        /* ==========================================================================
-           2. ШАПКА САЙТА И НАВИГАЦИЯ (HEADER & NAVIGATION)
-           ========================================================================== */
-        header {
-            background: linear-gradient(180deg, #0f111a 0%, #060709 100%);
-            border-bottom: 2px solid #141722;
-            padding: 50px 20px 30px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00f0ff, transparent);
-        }
-
-        .logo-container {
-            margin-bottom: 15px;
+            align-items: center;
         }
 
         h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-            display: inline-block;
+            color: #a855f7;
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+            margin-bottom: 20px;
+            font-size: 26px;
+            text-align: center;
         }
 
-        h1 span {
-            color: #00f0ff;
-            text-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
-        }
-
-        .subtitle {
-            color: #64748b;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 35px;
-            font-weight: 600;
-        }
-
-        nav {
+        /* Стиль панели переключения вкладок */
+        .tabs-nav {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            max-width: 600px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 500px;
+            background-color: #160f24;
+            border: 1px solid #3b225c;
+            border-radius: 10px;
+            padding: 4px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            overflow-x: auto;
         }
 
-        .nav-btn {
-            background: #0f111a;
-            color: #94a3b8;
-            padding: 12px 30px;
-            border: 1px solid #1e2436;
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #8b7fa4;
+            padding: 10px 5px;
+            font-size: 12px;
+            font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
+            text-align: center;
+            white-space: nowrap;
         }
 
-        .nav-btn:hover {
+        /* Активная вкладка */
+        .tab-btn.active {
+            background-color: #a855f7;
             color: #ffffff;
-            border-color: #00f0ff;
-            background: rgba(0, 240, 255, 0.05);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
-            transform: translateY(-2px);
+            box-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
         }
 
-        .nav-btn.active {
-            color: #060709;
-            background: #00f0ff;
-            border-color: #00f0ff;
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
-        }
-
-        /* ==========================================================================
-           3. ОСНОВНОЙ КОНТЕНТ (MAIN CONTENT & WRAPPER)
-           ========================================================================== */
-        main {
-            flex: 1;
-            max-width: 800px;
+        /* Контент вкладок (по умолчанию скрыт) */
+        .tab-content {
+            display: none;
             width: 100%;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 500px;
+            animation: fadeIn 0.3s ease;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #ffffff;
-            margin-bottom: 25px;
-            border-left: 4px solid #00f0ff;
-            padding-left: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .section-title .counter {
-            font-size: 0.9rem;
-            color: #64748b;
-            background: #0f111a;
-            padding: 4px 12px;
-            border-radius: 20px;
-            border: 1px solid #1e2436;
-        }
-
-        /* ==========================================================================
-           4. СТИЛИ КАРТОЧЕК УРОВНЕЙ (LEVEL CARDS)
-           ========================================================================== */
-        .list-wrapper {
+        /* Показываем активный контент */
+        .tab-content.active {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 12px;
         }
 
-        .level-card {
-            background: #0f111a;
-            border: 1px solid #1e2436;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Общий стиль для всех карточек на сайте */
+        .card {
+            background: linear-gradient(135deg, #1b122b 0%, #120a1c 100%);
+            border: 1px solid #3b225c;
             border-radius: 12px;
-            padding: 24px;
+            padding: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- ЛИСТЫ УРОВНЕЙ --- */
+        .level-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid #a855f7;
         }
-
-        .level-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: #1e2436;
-            transition: all 0.3s ease;
+        .impossible-card {
+            border-left: 4px solid #f59e0b;
         }
-
-        /* Цветовые маркеры для топа списка */
-        .level-card:nth-child(1)::before,
-        .level-card:nth-child(2)::before,
-        .level-card:nth-child(3)::before {
-            background: #ff0055;
-        }
-
-        .level-card:nth-child(4)::before,
-        .level-card:nth-child(5)::before,
-        .level-card:nth-child(6)::before,
-        .level-card:nth-child(7)::before,
-        .level-card:nth-child(8)::before {
-            background: #00f0ff;
-        }
-
-        .level-card:hover {
-            transform: translateX(8px);
-            background: #131622;
-            border-color: #2e374f;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .level-card:nth-child(1):hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(ff, 0, 85, 0.15); }
-        .level-card:nth-child(2):hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(ff, 0, 85, 0.15); }
-        .level-card:nth-child(3):hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(ff, 0, 85, 0.15); }
-        
-        .level-card:nth-child(n+4):hover { 
-            border-color: #00f0ff; 
-            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15); 
-        }
-
-        .left-content {
+        .level-info {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+        }
+        .level-rank {
+            font-size: 11px;
+            color: #a855f7;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .impossible-card .level-rank {
+            color: #f59e0b;
+        }
+        .level-name {
+            font-size: 17px;
+            font-weight: bold;
+            color: #fff;
+            margin: 2px 0;
+        }
+        .level-creator {
+            font-size: 12px;
+            color: #706780;
+        }
+        .level-creator span {
+            color: #a855f7;
+            font-weight: 500;
+        }
+        /* Оранжевая подсветка авторов для Impossible вкладки */
+        .impossible-card .level-creator span {
+            color: #f59e0b;
+        }
+        .video-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .video-btn:hover {
+            background-color: #dc2626;
+        }
+        .no-video {
+            background-color: #374151;
+            color: #9ca3af;
+            cursor: not-allowed;
         }
 
-        .level-header-info {
+        /* --- ТОП ИГРОКОВ --- */
+        .player-card {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
+            padding: 18px 14px;
         }
-
-        .level-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #ffffff;
+        .player-name {
+            font-size: 18px;
+            font-weight: bold;
             letter-spacing: 0.5px;
         }
-
-        .badge {
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .rank-1 .player-name { color: #ef4444; text-shadow: 0 0 5px rgba(239,68,68,0.4); }
+        .rank-2 .player-name { color: #10b981; text-shadow: 0 0 5px rgba(16,185,129,0.4); }
+        
+        .player-rank-tag {
+            font-size: 11px;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 10px;
+            color: #ccc;
+            font-weight: bold;
         }
 
-        .badge-impossible {
-            background: rgba(255, 0, 85, 0.1);
-            color: #ff0055;
-            border: 1px solid rgba(255, 0, 85, 0.2);
-        }
-
-        .badge-buffed {
-            background: rgba(0, 240, 255, 0.1);
-            color: #00f0ff;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-        }
-
-        .meta-creators {
-            font-size: 0.9rem;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .meta-creators span {
-            color: #cbd5e1;
-            font-weight: 600;
-        }
-
-        .meta-creators em {
-            color: #00f0ff;
-            font-style: normal;
-        }
-
-        /* Правая часть карточки (Порядковый номер) */
-        .right-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .rank-number {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #141722;
-            letter-spacing: -1px;
-            transition: all 0.3s ease;
-        }
-
-        .level-card:nth-child(1) .rank-number,
-        .level-card:nth-child(2) .rank-number,
-        .level-card:nth-child(3) .rank-number {
-            -webkit-text-stroke: 2px #ff0055;
-        }
-
-        .level-card:nth-child(n+4) .rank-number {
-            -webkit-text-stroke: 2px #00f0ff;
-        }
-
-        .level-card:hover .rank-number {
-            transform: scale(1.1);
-        }
-
-        /* ==========================================================================
-           5. ПОДВАЛ САЙТА (FOOTER)
-           ========================================================================== */
-        footer {
-            background: #050608;
-            border-top: 1px solid #141722;
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #475569;
-            margin-top: auto;
-        }
-
-        footer p {
+        /* --- ХАРДЭСТЫ --- */
+        .hardest-card {
+            border-left: 4px solid #ef4444;
             margin-bottom: 5px;
         }
+        .hardest-player {
+            font-size: 11px;
+            color: #ef4444;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .hardest-name {
+            font-size: 17px;
+            font-weight: bold;
+            color: #fff;
+            margin: 3px 0;
+        }
+        .hardest-subtext {
+            font-size: 12px; 
+            color: #8b7fa4;
+        }
 
-        footer span {
-            color: #64748b;
+        /* Нижняя плашка правил */
+        .rules-bar {
+            margin-top: 30px;
+            max-width: 500px;
+            width: 100%;
+            background-color: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: #fca5a5;
+            box-sizing: border-box;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <h1>Impossible <span>List</span></h1>
+    <h1>ЧВК Лишайник Team</h1>
+
+    <div class="tabs-nav">
+        <button class="tab-btn active" onclick="openTab('list')">Demon List</button>
+        <button class="tab-btn" onclick="openTab('impossible')">Impossible List</button>
+        <button class="tab-btn" onclick="openTab('top')">Топ Игроков</button>
+        <button class="tab-btn" onclick="openTab('hardest')">Hardests</button>
+    </div>
+
+    <div id="list" class="tab-content active">
+        <div class="card level-card">
+            <div class="level-info">
+                <span class="level-rank">Top 1</span>
+                <span class="level-name">K O C M O C BUFFED</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="https://youtu.be/W13VnezgNFo?si=SQ-mozP-1YmeNFpQ" target="_blank" class="video-btn">YouTube</a>
         </div>
-        <div class="subtitle">Demon List & Level Registry</div>
-        
-        <nav>
-            <button class="nav-btn active">Main List</button>
-            <button class="nav-btn">Stats Viewer</button>
-            <button class="nav-btn">Guidelines</button>
-        </nav>
-    </header>
 
-    <main>
-        <div class="section-title">
-            <h2>Top Placement</h2>
-            <div class="counter">8 Levels Registered</div>
+        <div class="card level-card">
+            <div class="level-info">
+                <span class="level-rank">Top 2</span>
+                <span class="level-name">Erium</span>
+                <span class="level-creator">Creators: <span>M4XMAN & Solarcult49</span></span>
+            </div>
+            <a href="https://youtu.be/DtiZslzm1dY?si=trLCrVVcrTMvjY9o" target="_blank" class="video-btn">YouTube</a>
         </div>
 
-        <div class="list-wrapper">
-
-            <div class="level-card">
-                <div class="left-content">
-                    <div class="level-header-info">
-                        <h3 class="level-title">K O C M O C</h3>
-                        <span class="badge badge-impossible">Top 1 Elite</span>
-                    </div>
-                    <p class="meta-creators">Created by: <span>Solarcult49</span></p>
-                </div>
-                <div class="right-content">
-                    <div class="rank-number">#1</div>
-                </div>
+        <div class="card level-card">
+            <div class="level-info">
+                <span class="level-rank">Top 3</span>
+                <span class="level-name">TROLLStep</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
             </div>
-
-            <div class="level-card">
-                <div class="left-content">
-                    <div class="level-header-info">
-                        <h3 class="level-title">K O C M O C REBUILD</h3>
-                        <span class="badge badge-impossible">Rebuilt Edition</span>
-                    </div>
-                    <p class="meta-creators">Created by: <span>Solarcult49</span></p>
-                </div>
-                <div class="right-content">
-                    <div class="rank-number">#2</div>
-                </div>
-            </div>
-
-            <div class="level-card">
-                <div class="left-content">
-                    <div class="level-header-info">
-                        <h3 class="level-title">K O C M O C BUFFED</h3>
-                        <span class="badge badge-impossible">Maximum Buff</span>
-                    </div>
-                    <p class="meta-creators">Created by: <span>Solarcult49</span></p>
-                </div>
-                <div class="right-content">
-                    <div class="rank-number">#3</div>
-                </div>
-            </div>
-
-            <div class="level-card">
-                <div class="left-content">
-                    <div class="level-header-info">
-                        <h3 class="level-title">Erium</h3>
-                        <span class="badge badge-buffed">Collab</span>
-                    </div>
-                    <p class="meta-creators">Created by: <span>M4XMAN</span> <em>&</em> <span>Solarcult49</span></p>
-                </div>
-                <div class="right-content">
-                    <div class="rank-number">#4</div>
-                </div>
-            </div>
-
-            <div class="level-card">
-                <div class="left-content">
-                    <div class="level-header-info">
-                        <h3 class="level-title">Logus</h3>
-                        <span class="badge badge-buffed">Collab</span>
-                    </div>
-                    <p class="meta-creators">Created by: <span>M4XMAN</span> <em>&</em> <span>Solarcult49</span></p>
-                </div>
-                <div class="right-content">
-                    <div class="rank-number">#5</div>
-                </div>
-            </div>
-
-            <div class="level-card">
-                <div class="left-content">
-                    <div class="level-header-info">
-                        <h3 class="level-title">The Lost Fantasy</h3>
-                        <span class="badge badge-buffed">Collab</span>
-                    </div>
-                    <p class="meta-creators">Created by: <span>Solarcult49</span> <em>&</em> <span>M4XMAN</span></p>
-                </div>
-                <div class="right-content">
-                    <div class="rank-number">#6</div>
-                </div>
-            </div>
-
-            <div class="level-card">
-                <div class="left-content">
-                    <div class="level-header-info">
-                        <h3 class="level-title">Extreme Rush X</h3>
-                        <span class="badge badge-buffed">Collab</span>
-                    </div>
-                    <p class="meta-creators">Created by: <span>M4XMAN</span> <em>&</em> <span>Solarcult49</span></p>
-                </div>
-                <div class="right-content">
-                    <div class="rank-number">#7</div>
-                </div>
-            </div>
-
-            <div class="level-card">
-                <div class="left-content">
-                    <div class="level-header-info">
-                        <h3 class="level-title">TROLLStep</h3>
-                        <span class="badge badge-buffed">Solo Project</span>
-                    </div>
-                    <p class="meta-creators">Created by: <span>Solarcult49</span></p>
-                </div>
-                <div class="right-content">
-                    <div class="rank-number">#8</div>
-                </div>
-            </div>
-
+            <a href="https://youtu.be/BEtUGgO0SbY?si=8vRcGJjjXd6OC7Tg" target="_blank" class="video-btn">YouTube</a>
         </div>
-    </main>
 
-    <footer>
-        <p>&copy; 2026 Impossible List Registry. All rights reserved.</p>
-        <p>Created for Geometry Dash Community <span>&bull;</span> Powered by HTML & CSS</p>
-    </footer>
+        <div class="card level-card">
+            <div class="level-info">
+                <span class="level-rank">Top 4</span>
+                <span class="level-name">Logus</span>
+                <span class="level-creator">Creators: <span>M4XMAN & Solarcult49</span></span>
+            </div>
+            <a href="https://youtu.be/AfzDpWReRZk?si=IofMdvcT95z39GtK" target="_blank" class="video-btn">YouTube</a>
+        </div>
+
+        <div class="card level-card">
+            <div class="level-info">
+                <span class="level-rank">Top 5</span>
+                <span class="level-name">The Lost Fantasy</span>
+                <span class="level-creator">Creators: <span>Solarcult49 & M4XMAN</span></span>
+            </div>
+            <a href="https://youtu.be/6Fndn_-pTkY?si=8KG6ze1dmXf_Ln-N" target="_blank" class="video-btn">YouTube</a>
+        </div>
+
+        <div class="card level-card">
+            <div class="level-info">
+                <span class="level-rank">Top 6</span>
+                <span class="level-name">Extreme Rush X</span>
+                <span class="level-creator">Creators: <span>M4XMAN & Solarcult49</span></span>
+            </div>
+            <a href="https://youtu.be/YfYI5ec672U?si=ActHlIlYqb1KCgtF" target="_blank" class="video-btn">YouTube</a>
+        </div>
+
+        <div class="card level-card">
+            <div class="level-info">
+                <span class="level-rank">Top 7</span>
+                <span class="level-name">K O C M O C REBUILD</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="https://youtu.be/kW6hCoG-ToU?si=4wq7i96HGD1nmcYo" target="_blank" class="video-btn">YouTube</a>
+        </div>
+
+        <div class="card level-card">
+            <div class="level-info">
+                <span class="level-rank">Top 8</span>
+                <span class="level-name">K O C M O C</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="https://youtu.be/eYCq-fY3JLs?si=C-5hqQZHGIvt1ZcZ" target="_blank" class="video-btn">YouTube</a>
+        </div>
+    </div>
+
+    <div id="impossible" class="tab-content">
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 1 (ILL)</span>
+                <span class="level-name">Cant be beaten</span>
+                <span class="level-creator">Creator: <span>M4XMAN</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 2 (ILL)</span>
+                <span class="level-name">Base No Hope Remain</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 3 (ILL)</span>
+                <span class="level-name">The Living Memory</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 4 (ILL)</span>
+                <span class="level-name">The BlackActivision</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 5 (ILL)</span>
+                <span class="level-name">TROLLStep (Frame Perfect Ver.)</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 6 (ILL)</span>
+                <span class="level-name">Lights After Dark</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 7 (ILL)</span>
+                <span class="level-name">Incoming Travel</span>
+                <span class="level-creator">Creators: <span>Solarcult49 & M4XMAN</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 8 (ILL)</span>
+                <span class="level-name">Memory Chaos</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+
+        <div class="card level-card impossible-card">
+            <div class="level-info">
+                <span class="level-rank">Top 9 (ILL)</span>
+                <span class="level-name">Tidal Remix</span>
+                <span class="level-creator">Creator: <span>Solarcult49</span></span>
+            </div>
+            <a href="#" class="video-btn no-video" onclick="return false;">Нет видео</a>
+        </div>
+    </div>
+
+    <div id="top" class="tab-content">
+        <div class="card player-card rank-1">
+            <div class="player-name">SOLARCULT49</div>
+            <div class="player-rank-tag">Top 1 ЛИСТА</div>
+        </div>
+
+        <div class="card player-card rank-2">
+            <div class="player-name">M4XMAN</div>
+            <div class="player-rank-tag">Top 2 ЛИСТА</div>
+        </div>
+    </div>
+
+    <div id="hardest" class="tab-content">
+        <div class="card hardest-card">
+            <div class="hardest-player">SOLARCULT49</div>
+            <div class="hardest-name">K O C M O C BUFFED (Top 1)</div>
+            <div class="hardest-subtext">Hardest в основном листе</div>
+        </div>
+        <div class="card hardest-card" style="opacity: 0.6;">
+            <div class="hardest-player">SOLARCULT49</div>
+            <div class="hardest-name">[UNKNOWN]</div>
+            <div class="hardest-subtext">Hardest в Impossible List</div>
+        </div>
+
+        <div class="card hardest-card" style="border-left-color: #10b981;">
+            <div class="hardest-player" style="color: #10b981;">M4XMAN</div>
+            <div class="hardest-name">Extreme Rush X (Top 6)</div>
+            <div class="hardest-subtext">Hardest в основном листе</div>
+        </div>
+        <div class="card hardest-card" style="border-left-color: #10b981; opacity: 0.6;">
+            <div class="hardest-player" style="color: #10b981;">M4XMAN</div>
+            <div class="hardest-name">[UNKNOWN]</div>
+            <div class="hardest-subtext">Hardest в Impossible List</div>
+        </div>
+    </div>
+
+    <div class="rules-bar">
+        ⚠️ <strong>Правило верификации:</strong> Рекорды принимаются только с победным экраном и/или <strong>зелёным чит-индикатором</strong>! Никаких скрытых читов.
+    </div>
+
+    <script>
+        function openTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 
 </body>
-</html>
+            </html>
+                                                                                    
