@@ -36,7 +36,7 @@
             padding: 4px;
             margin-bottom: 25px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-            overflow-x: auto; /* На случай если на мелком экране не влезет в ряд */
+            overflow-x: auto;
         }
 
         .tab-btn {
@@ -90,7 +90,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
-        /* --- ВКЛАДКА 1 и 2: ЛИСТЫ УРОВНЕЙ --- */
+        /* --- ЛИСТЫ УРОВНЕЙ --- */
         .level-card {
             display: flex;
             justify-content: space-between;
@@ -98,7 +98,7 @@
             border-left: 4px solid #a855f7;
         }
         .impossible-card {
-            border-left: 4px solid #f59e0b; /* Оранжевый цвет для невозможных уровней */
+            border-left: 4px solid #f59e0b;
         }
         .level-info {
             display: flex;
@@ -144,12 +144,12 @@
             cursor: not-allowed;
         }
 
-        /* --- ВКЛАДКА 3: ТОП ИГРОКОВ --- */
-        .player-header {
+        /* --- ТОП ИГРОКОВ --- */
+        .player-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            padding: 18px 14px;
         }
         .player-name {
             font-size: 18px;
@@ -162,20 +162,13 @@
         .player-rank-tag {
             font-size: 11px;
             background: rgba(255,255,255,0.1);
-            padding: 2px 8px;
+            padding: 4px 10px;
             border-radius: 10px;
             color: #ccc;
-        }
-        .stats-row {
-            display: flex;
-            justify-content: space-around;
-            background: rgba(0,0,0,0.2);
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 12px;
+            font-weight: bold;
         }
 
-        /* --- ВКЛАДКА 4: ХАРДЭСТЫ --- */
+        /* --- ХАРДЭСТЫ --- */
         .hardest-card {
             border-left: 4px solid #ef4444;
             margin-bottom: 5px;
@@ -210,6 +203,7 @@
             font-size: 12px;
             color: #fca5a5;
             box-sizing: border-box;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -382,28 +376,14 @@
     </div>
 
     <div id="top" class="tab-content">
-        <div class="card rank-1">
-            <div class="player-header">
-                <div class="player-name">SOLARCULT49</div>
-                <div class="player-rank-tag">Top 1 ЛИСТА</div>
-            </div>
-            <div class="stats-row">
-                <span><b style="color: #fbbf24;">1,790</b> ★</span>
-                <span><b style="color: #60a5fa;">610</b> 🌙</span>
-                <span><b style="color: #f87171;">120</b> Демонов</span>
-            </div>
+        <div class="card player-card rank-1">
+            <div class="player-name">SOLARCULT49</div>
+            <div class="player-rank-tag">Top 1 ЛИСТА</div>
         </div>
 
-        <div class="card rank-2">
-            <div class="player-header">
-                <div class="player-name">M4XMAN</div>
-                <div class="player-rank-tag">Top 2 ЛИСТА</div>
-            </div>
-            <div class="stats-row">
-                <span><b style="color: #fbbf24;">238</b> ★</span>
-                <span><b style="color: #60a5fa;">247</b> 🌙</span>
-                <span><b style="color: #f87171;">29</b> Демонов</span>
-            </div>
+        <div class="card player-card rank-2">
+            <div class="player-name">M4XMAN</div>
+            <div class="player-rank-tag">Top 2 ЛИСТА</div>
         </div>
     </div>
 
@@ -432,25 +412,22 @@
     </div>
 
     <div class="rules-bar">
-        ⚠️ <strong>Правило верификации:</strong> Рекорды принимаются только с победным экраном и <strong>зелёным чит-индикатором</strong>! Никаких скрытых читов.
+        ⚠️ <strong>Правило верификации:</strong> Рекорды принимаются только с победным экраном и/или <strong>зелёным чит-индикатором</strong>! Никаких скрытых читов.
     </div>
 
     <script>
         function openTab(tabId) {
-            // Скрываем весь контент
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
-            // Убираем активный класс со всех кнопок
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Показываем нужную вкладку и делаем кнопку активной
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
     </script>
 
 </body>
-                                                                                 </html>
-  
+                                                                                        </html>
+                
