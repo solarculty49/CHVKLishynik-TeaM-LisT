@@ -3,212 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Impossible Demon List</title>
+    <title>Impossible List</title>
     <style>
-        /* Общие стили для сайта (Темная игровая тема) */
-        body {
-            background-color: #0b0c10;
-            color: #c5c6c7;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Базовые настройки для всего сайта */
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d0e12;
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            padding-bottom: 60px;
+        }
+
+        /* Шапка сайта */
+        header {
+            background: linear-gradient(180deg, #14161d 0%, #0d0e12 100%);
+            padding: 40px 20px 20px 20px;
+            text-align: center;
+            border-bottom: 1px solid #1e2230;
         }
 
         h1 {
-            color: #66fcf1;
+            font-size: 2.5rem;
+            color: #00f0ff;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+            margin-bottom: 8px;
         }
 
         .subtitle {
-            color: #45f3ff;
-            font-size: 1.1em;
-            margin-bottom: 30px;
-            opacity: 0.8;
-        }
-
-        /* Блок главного рекорда (Current Hardest) */
-        .hardest-box {
-            background: linear-gradient(135deg, #1f2833 0%, #0b0c10 100%);
-            border: 2px solid #ff4545;
-            border-radius: 10px;
-            padding: 20px;
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 40px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(255, 69, 69, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hardest-box::before {
-            content: 'CURRENT HARDEST';
-            position: absolute;
-            top: 5px;
-            left: 10px;
-            font-size: 0.75em;
-            color: #ff4545;
-            font-weight: bold;
+            color: #718096;
+            font-size: 1rem;
             letter-spacing: 1px;
         }
 
-        .hardest-title {
-            font-size: 1.8em;
-            color: #fff;
-            margin: 10px 0 5px 0;
-            font-weight: bold;
+        /* Навигация (Вкладки) */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0 10px 0;
         }
 
-        .hardest-progress {
-            font-size: 2.5em;
-            color: #ff4545;
-            font-weight: 900;
-            margin: 5px 0;
-            text-shadow: 0 0 10px rgba(255, 69, 69, 0.4);
+        .nav-link {
+            background-color: #14161d;
+            color: #a0aec0;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #1e2230;
+            transition: all 0.2s ease;
         }
 
-        /* Контейнер для всего списка уровней */
+        .nav-link.active, .nav-link:hover {
+            color: #00f0ff;
+            border-color: #00f0ff;
+            background-color: rgba(0, 240, 255, 0.05);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+        }
+
+        /* Главный контейнер со списком */
+        main {
+            max-width: 680px;
+            margin: 30px auto 0 auto;
+            padding: 0 20px;
+        }
+
         .list-container {
-            width: 100%;
-            max-width: 600px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 14px;
         }
 
         /* Карточка уровня */
         .level-card {
-            background-color: #1f2833;
-            border-left: 5px solid #66fcf1;
-            border-radius: 6px;
-            padding: 15px 20px;
+            background-color: #14161d;
+            border: 1px solid #1e2230;
+            border-left: 5px solid #00f0ff;
+            border-radius: 10px;
+            padding: 18px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
 
         .level-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(102, 252, 241, 0.1);
+            transform: translateY(-2px);
+            border-color: #00f0ff;
+            background-color: #171a24;
         }
 
         .level-info {
             display: flex;
             flex-direction: column;
+            gap: 4px;
         }
 
         .level-name {
-            font-size: 1.3em;
+            font-size: 1.35rem;
             color: #ffffff;
-            font-weight: bold;
-            margin: 0 0 5px 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .level-creators {
-            font-size: 0.9em;
-            color: #a9a9a9;
-            margin: 0;
+            font-size: 0.85rem;
+            color: #718096;
         }
 
         .level-creators span {
-            color: #45f3ff;
+            color: #38bdf8;
+            font-weight: 500;
         }
 
-        /* Номер уровня в списке */
+        /* Порядковый номер */
         .level-number {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #1f2833;
-            -webkit-text-stroke: 1px #66fcf1;
-            opacity: 0.7;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1e2230;
+            -webkit-text-stroke: 1.5px #00f0ff;
+            letter-spacing: -1px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Impossible List</h1>
-    <div class="subtitle">My Personal Demon List & Progress</div>
+    <header>
+        <h1>Impossible List</h1>
+        <div class="subtitle">Official Demon List & Progress Tracker</div>
+        
+        <nav>
+            <a href="#" class="nav-link active">Main List</a>
+            <a href="#" class="nav-link">Stats</a>
+            <a href="#" class="nav-link">Info</a>
+        </nav>
+    </header>
 
-    <div class="hardest-box">
-        <div class="hardest-title">Base No Remake</div>
-        <div class="hardest-progress">95%</div>
-        <p style="margin: 5px 0 0 0; color: #a9a9a9; font-size: 0.9em;">Невероятный прогресс в Impossible листе!</p>
-    </div>
+    <main>
+        <div class="list-container">
 
-    <div class="list-container">
-
-        <div class="level-card">
-            <div class="level-info">
-                <p class="level-name">K O C M O C</p>
-                <p class="level-creators">Creator: <span>Solarcult49</span></p>
+            <div class="level-card">
+                <div class="level-info">
+                    <p class="level-name">K O C M O C</p>
+                    <p class="level-creators">Creator: <span>Solarcult49</span></p>
+                </div>
+                <div class="level-number">#1</div>
             </div>
-            <div class="level-number">#1</div>
-        </div>
 
-        <div class="level-card">
-            <div class="level-info">
-                <p class="level-name">K O C M O C REBUILD</p>
-                <p class="level-creators">Creator: <span>Solarcult49</span></p>
+            <div class="level-card">
+                <div class="level-info">
+                    <p class="level-name">K O C M O C REBUILD</p>
+                    <p class="level-creators">Creator: <span>Solarcult49</span></p>
+                </div>
+                <div class="level-number">#2</div>
             </div>
-            <div class="level-number">#2</div>
-        </div>
 
-        <div class="level-card">
-            <div class="level-info">
-                <p class="level-name">K O C M O C BUFFED</p>
-                <p class="level-creators">Creator: <span>Solarcult49</span></p>
+            <div class="level-card">
+                <div class="level-info">
+                    <p class="level-name">K O C M O C BUFFED</p>
+                    <p class="level-creators">Creator: <span>Solarcult49</span></p>
+                </div>
+                <div class="level-number">#3</div>
             </div>
-            <div class="level-number">#3</div>
-        </div>
 
-        <div class="level-card">
-            <div class="level-info">
-                <p class="level-name">Erium</p>
-                <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+            <div class="level-card">
+                <div class="level-info">
+                    <p class="level-name">Erium</p>
+                    <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+                </div>
+                <div class="level-number">#4</div>
             </div>
-            <div class="level-number">#4</div>
-        </div>
 
-        <div class="level-card">
-            <div class="level-info">
-                <p class="level-name">Logus</p>
-                <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+            <div class="level-card">
+                <div class="level-info">
+                    <p class="level-name">Logus</p>
+                    <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+                </div>
+                <div class="level-number">#5</div>
             </div>
-            <div class="level-number">#5</div>
-        </div>
 
-        <div class="level-card">
-            <div class="level-info">
-                <p class="level-name">The Lost Fantasy</p>
-                <p class="level-creators">Creators: <span>Solarcult49 & M4XMAN</span></p>
+            <div class="level-card">
+                <div class="level-info">
+                    <p class="level-name">The Lost Fantasy</p>
+                    <p class="level-creators">Creators: <span>Solarcult49 & M4XMAN</span></p>
+                </div>
+                <div class="level-number">#6</div>
             </div>
-            <div class="level-number">#6</div>
-        </div>
 
-        <div class="level-card">
-            <div class="level-info">
-                <p class="level-name">Extreme Rush X</p>
-                <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+            <div class="level-card">
+                <div class="level-info">
+                    <p class="level-name">Extreme Rush X</p>
+                    <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+                </div>
+                <div class="level-number">#7</div>
             </div>
-            <div class="level-number">#7</div>
-        </div>
 
-        <div class="level-card">
-            <div class="level-info">
-                <p class="level-name">TROLLStep</p>
-                <p class="level-creators">Creator: <span>Solarcult49</span></p>
+            <div class="level-card">
+                <div class="level-info">
+                    <p class="level-name">TROLLStep</p>
+                    <p class="level-creators">Creator: <span>Solarcult49</span></p>
+                </div>
+                <div class="level-number">#8</div>
             </div>
-            <div class="level-number">#8</div>
-        </div>
 
-    </div>
+        </div>
+    </main>
 
 </body>
 </html>
