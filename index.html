@@ -3,219 +3,469 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impossible List</title>
+    <title>Geometry Dash: Extreme Impossible List</title>
     <style>
-        /* Базовые настройки для всего сайта */
+        /* ==========================================================================
+           1. СБРОС СТИЛЕЙ И БАЗОВЫЕ НАСТРОЙКИ (RESET & BASE)
+           ========================================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08090c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2330;
+            border-radius: 5px;
+            border: 2px solid #08090c;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f0ff;
         }
 
         body {
-            background-color: #0d0e12;
+            background-color: #060709;
             color: #e2e8f0;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            padding-bottom: 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* Шапка сайта */
+        /* ==========================================================================
+           2. ШАПКА САЙТА И НАВИГАЦИЯ (HEADER & NAVIGATION)
+           ========================================================================== */
         header {
-            background: linear-gradient(180deg, #14161d 0%, #0d0e12 100%);
-            padding: 40px 20px 20px 20px;
+            background: linear-gradient(180deg, #0f111a 0%, #060709 100%);
+            border-bottom: 2px solid #141722;
+            padding: 50px 20px 30px 20px;
             text-align: center;
-            border-bottom: 1px solid #1e2230;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+        }
+
+        .logo-container {
+            margin-bottom: 15px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: #00f0ff;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
-            margin-bottom: 8px;
+            letter-spacing: 5px;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            display: inline-block;
+        }
+
+        h1 span {
+            color: #00f0ff;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
         }
 
         .subtitle {
-            color: #718096;
+            color: #64748b;
             font-size: 1rem;
-            letter-spacing: 1px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+            font-weight: 600;
         }
 
-        /* Навигация (Вкладки) */
         nav {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 25px 0 10px 0;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .nav-link {
-            background-color: #14161d;
-            color: #a0aec0;
-            padding: 10px 25px;
-            text-decoration: none;
+        .nav-btn {
+            background: #0f111a;
+            color: #94a3b8;
+            padding: 12px 30px;
+            border: 1px solid #1e2436;
             border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border: 1px solid #1e2230;
-            transition: all 0.2s ease;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .nav-link.active, .nav-link:hover {
-            color: #00f0ff;
+        .nav-btn:hover {
+            color: #ffffff;
             border-color: #00f0ff;
-            background-color: rgba(0, 240, 255, 0.05);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+            background: rgba(0, 240, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+            transform: translateY(-2px);
         }
 
-        /* Главный контейнер со списком */
+        .nav-btn.active {
+            color: #060709;
+            background: #00f0ff;
+            border-color: #00f0ff;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+        }
+
+        /* ==========================================================================
+           3. ОСНОВНОЙ КОНТЕНТ (MAIN CONTENT & WRAPPER)
+           ========================================================================== */
         main {
-            max-width: 680px;
-            margin: 30px auto 0 auto;
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 40px auto;
             padding: 0 20px;
         }
 
-        .list-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        /* Карточка уровня */
-        .level-card {
-            background-color: #14161d;
-            border: 1px solid #1e2230;
-            border-left: 5px solid #00f0ff;
-            border-radius: 10px;
-            padding: 18px 24px;
+        .section-title {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            border-left: 4px solid #00f0ff;
+            padding-left: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .section-title .counter {
+            font-size: 0.9rem;
+            color: #64748b;
+            background: #0f111a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid #1e2436;
+        }
+
+        /* ==========================================================================
+           4. СТИЛИ КАРТОЧЕК УРОВНЕЙ (LEVEL CARDS)
+           ========================================================================== */
+        .list-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .level-card {
+            background: #0f111a;
+            border: 1px solid #1e2436;
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .level-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #1e2436;
+            transition: all 0.3s ease;
+        }
+
+        /* Цветовые маркеры для топа списка */
+        .level-card:nth-child(1)::before,
+        .level-card:nth-child(2)::before,
+        .level-card:nth-child(3)::before {
+            background: #ff0055;
+        }
+
+        .level-card:nth-child(4)::before,
+        .level-card:nth-child(5)::before,
+        .level-card:nth-child(6)::before,
+        .level-card:nth-child(7)::before,
+        .level-card:nth-child(8)::before {
+            background: #00f0ff;
         }
 
         .level-card:hover {
-            transform: translateY(-2px);
-            border-color: #00f0ff;
-            background-color: #171a24;
+            transform: translateX(8px);
+            background: #131622;
+            border-color: #2e374f;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .level-info {
+        .level-card:nth-child(1):hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(ff, 0, 85, 0.15); }
+        .level-card:nth-child(2):hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(ff, 0, 85, 0.15); }
+        .level-card:nth-child(3):hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(ff, 0, 85, 0.15); }
+        
+        .level-card:nth-child(n+4):hover { 
+            border-color: #00f0ff; 
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15); 
+        }
+
+        .left-content {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 8px;
         }
 
-        .level-name {
-            font-size: 1.35rem;
+        .level-header-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .level-title {
+            font-size: 1.6rem;
+            font-weight: 800;
             color: #ffffff;
-            font-weight: 700;
             letter-spacing: 0.5px;
         }
 
-        .level-creators {
-            font-size: 0.85rem;
-            color: #718096;
-        }
-
-        .level-creators span {
-            color: #38bdf8;
-            font-weight: 500;
-        }
-
-        /* Порядковый номер */
-        .level-number {
-            font-size: 1.6rem;
+        .badge {
+            font-size: 0.7rem;
             font-weight: 800;
-            color: #1e2230;
-            -webkit-text-stroke: 1.5px #00f0ff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge-impossible {
+            background: rgba(255, 0, 85, 0.1);
+            color: #ff0055;
+            border: 1px solid rgba(255, 0, 85, 0.2);
+        }
+
+        .badge-buffed {
+            background: rgba(0, 240, 255, 0.1);
+            color: #00f0ff;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .meta-creators {
+            font-size: 0.9rem;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .meta-creators span {
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .meta-creators em {
+            color: #00f0ff;
+            font-style: normal;
+        }
+
+        /* Правая часть карточки (Порядковый номер) */
+        .right-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rank-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #141722;
             letter-spacing: -1px;
+            transition: all 0.3s ease;
+        }
+
+        .level-card:nth-child(1) .rank-number,
+        .level-card:nth-child(2) .rank-number,
+        .level-card:nth-child(3) .rank-number {
+            -webkit-text-stroke: 2px #ff0055;
+        }
+
+        .level-card:nth-child(n+4) .rank-number {
+            -webkit-text-stroke: 2px #00f0ff;
+        }
+
+        .level-card:hover .rank-number {
+            transform: scale(1.1);
+        }
+
+        /* ==========================================================================
+           5. ПОДВАЛ САЙТА (FOOTER)
+           ========================================================================== */
+        footer {
+            background: #050608;
+            border-top: 1px solid #141722;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #475569;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin-bottom: 5px;
+        }
+
+        footer span {
+            color: #64748b;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Impossible List</h1>
-        <div class="subtitle">Official Demon List & Progress Tracker</div>
+        <div class="logo-container">
+            <h1>Impossible <span>List</span></h1>
+        </div>
+        <div class="subtitle">Demon List & Level Registry</div>
         
         <nav>
-            <a href="#" class="nav-link active">Main List</a>
-            <a href="#" class="nav-link">Stats</a>
-            <a href="#" class="nav-link">Info</a>
+            <button class="nav-btn active">Main List</button>
+            <button class="nav-btn">Stats Viewer</button>
+            <button class="nav-btn">Guidelines</button>
         </nav>
     </header>
 
     <main>
-        <div class="list-container">
+        <div class="section-title">
+            <h2>Top Placement</h2>
+            <div class="counter">8 Levels Registered</div>
+        </div>
+
+        <div class="list-wrapper">
 
             <div class="level-card">
-                <div class="level-info">
-                    <p class="level-name">K O C M O C</p>
-                    <p class="level-creators">Creator: <span>Solarcult49</span></p>
+                <div class="left-content">
+                    <div class="level-header-info">
+                        <h3 class="level-title">K O C M O C</h3>
+                        <span class="badge badge-impossible">Top 1 Elite</span>
+                    </div>
+                    <p class="meta-creators">Created by: <span>Solarcult49</span></p>
                 </div>
-                <div class="level-number">#1</div>
+                <div class="right-content">
+                    <div class="rank-number">#1</div>
+                </div>
             </div>
 
             <div class="level-card">
-                <div class="level-info">
-                    <p class="level-name">K O C M O C REBUILD</p>
-                    <p class="level-creators">Creator: <span>Solarcult49</span></p>
+                <div class="left-content">
+                    <div class="level-header-info">
+                        <h3 class="level-title">K O C M O C REBUILD</h3>
+                        <span class="badge badge-impossible">Rebuilt Edition</span>
+                    </div>
+                    <p class="meta-creators">Created by: <span>Solarcult49</span></p>
                 </div>
-                <div class="level-number">#2</div>
+                <div class="right-content">
+                    <div class="rank-number">#2</div>
+                </div>
             </div>
 
             <div class="level-card">
-                <div class="level-info">
-                    <p class="level-name">K O C M O C BUFFED</p>
-                    <p class="level-creators">Creator: <span>Solarcult49</span></p>
+                <div class="left-content">
+                    <div class="level-header-info">
+                        <h3 class="level-title">K O C M O C BUFFED</h3>
+                        <span class="badge badge-impossible">Maximum Buff</span>
+                    </div>
+                    <p class="meta-creators">Created by: <span>Solarcult49</span></p>
                 </div>
-                <div class="level-number">#3</div>
+                <div class="right-content">
+                    <div class="rank-number">#3</div>
+                </div>
             </div>
 
             <div class="level-card">
-                <div class="level-info">
-                    <p class="level-name">Erium</p>
-                    <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+                <div class="left-content">
+                    <div class="level-header-info">
+                        <h3 class="level-title">Erium</h3>
+                        <span class="badge badge-buffed">Collab</span>
+                    </div>
+                    <p class="meta-creators">Created by: <span>M4XMAN</span> <em>&</em> <span>Solarcult49</span></p>
                 </div>
-                <div class="level-number">#4</div>
+                <div class="right-content">
+                    <div class="rank-number">#4</div>
+                </div>
             </div>
 
             <div class="level-card">
-                <div class="level-info">
-                    <p class="level-name">Logus</p>
-                    <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+                <div class="left-content">
+                    <div class="level-header-info">
+                        <h3 class="level-title">Logus</h3>
+                        <span class="badge badge-buffed">Collab</span>
+                    </div>
+                    <p class="meta-creators">Created by: <span>M4XMAN</span> <em>&</em> <span>Solarcult49</span></p>
                 </div>
-                <div class="level-number">#5</div>
+                <div class="right-content">
+                    <div class="rank-number">#5</div>
+                </div>
             </div>
 
             <div class="level-card">
-                <div class="level-info">
-                    <p class="level-name">The Lost Fantasy</p>
-                    <p class="level-creators">Creators: <span>Solarcult49 & M4XMAN</span></p>
+                <div class="left-content">
+                    <div class="level-header-info">
+                        <h3 class="level-title">The Lost Fantasy</h3>
+                        <span class="badge badge-buffed">Collab</span>
+                    </div>
+                    <p class="meta-creators">Created by: <span>Solarcult49</span> <em>&</em> <span>M4XMAN</span></p>
                 </div>
-                <div class="level-number">#6</div>
+                <div class="right-content">
+                    <div class="rank-number">#6</div>
+                </div>
             </div>
 
             <div class="level-card">
-                <div class="level-info">
-                    <p class="level-name">Extreme Rush X</p>
-                    <p class="level-creators">Creators: <span>M4XMAN & Solarcult49</span></p>
+                <div class="left-content">
+                    <div class="level-header-info">
+                        <h3 class="level-title">Extreme Rush X</h3>
+                        <span class="badge badge-buffed">Collab</span>
+                    </div>
+                    <p class="meta-creators">Created by: <span>M4XMAN</span> <em>&</em> <span>Solarcult49</span></p>
                 </div>
-                <div class="level-number">#7</div>
+                <div class="right-content">
+                    <div class="rank-number">#7</div>
+                </div>
             </div>
 
             <div class="level-card">
-                <div class="level-info">
-                    <p class="level-name">TROLLStep</p>
-                    <p class="level-creators">Creator: <span>Solarcult49</span></p>
+                <div class="left-content">
+                    <div class="level-header-info">
+                        <h3 class="level-title">TROLLStep</h3>
+                        <span class="badge badge-buffed">Solo Project</span>
+                    </div>
+                    <p class="meta-creators">Created by: <span>Solarcult49</span></p>
                 </div>
-                <div class="level-number">#8</div>
+                <div class="right-content">
+                    <div class="rank-number">#8</div>
+                </div>
             </div>
 
         </div>
     </main>
+
+    <footer>
+        <p>&copy; 2026 Impossible List Registry. All rights reserved.</p>
+        <p>Created for Geometry Dash Community <span>&bull;</span> Powered by HTML & CSS</p>
+    </footer>
 
 </body>
 </html>
